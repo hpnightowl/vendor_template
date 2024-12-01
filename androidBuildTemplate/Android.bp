@@ -1,0 +1,47 @@
+android_app_import {
+    name: "SampleLauncher",
+    privileged: true,
+    apk: "prebuilts/SampleLauncher.apk",
+    overrides: [
+        "Launcher2",
+        "Launcher3",
+        "Launcher3QuickStep",
+        "CarLauncher",
+        "SnapdragonLauncher",
+    ],
+    presigned: true,
+}
+
+
+android_app_import {
+    name: "SampleApp",
+    system_ext_specific: true,
+    apk: "prebuilts/SampleApp.apk",
+    optional_uses_libs: [
+        "androidx.window.extensions",
+        "androidx.window.sidecar",
+    ],
+    presigned: true,
+}
+
+
+android_app_import {
+    name: "SampleAppWithPermission",
+    system_ext_specific: true,
+    privileged: true,
+    optional_uses_libs: [
+        "androidx.window.extensions",
+        "androidx.window.sidecar",
+    ],
+    apk: "prebuilts/SampleAppWithPermission.apk",
+    required: ["privapp_whitelist_com.sample.app.xml"],
+}
+
+
+prebuilt_etc {
+    name: "privapp_whitelist_com.sample.app.xml",
+    system_ext_specific: true,
+    src: "permissions/com.sample.app.xml",
+    sub_dir:"permissions",
+    filename_from_src: true,
+}
